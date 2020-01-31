@@ -52,17 +52,30 @@ def sort_by_cohort(filename):
     For example:
 
     >>> sort_by_cohort("cohort_data.txt")
-    [['Harry Potter', 'Mandy Brocklehurst', 'Ron Weasley', 'Oliver Wood', 'Colin Creevey', 'Cho Chang', 'Michael Corner', 'Draco Malfoy', 'Seamus Finnigan', 'Eddie Carmichael', 'Theodore Nott', 'Terence Higgs', 'Hermione Granger', 'Penelope Clearwater', 'Angelina Johnson', 'Dennis Creevey'], ['Neville Longbottom', 'Cedric Diggory', 'Pansy Parkinson', 'Anthony Goldstein', 'Padma Patil', 'Luna Lovegood', 'Eleanor Branstone', 'Lee Jordan', 'Marietta Edgecombe', 'Andrew Kirke', 'Ginny Weasley', 'Mary Macdonald', 'Blaise Zabini', 'Natalie McDonald', 'Adrian Pucey', 'Hannah Abbott', 'Graham Pritchard', 'Susan Bones', 'Roger Davies', 'Owen Cauldwell'], ['Laura Madley', 'Orla Quirke', 'Parvati Patil', 'Eloise Midgeon', 'Zacharias Smith', 'Cormac McLaggen', 'Lisa Turpin', 'Demelza Robins', 'Ernie Macmillan', 'Millicent Bullstrode', 'Percy Weasley', 'Jimmy Peakes', 'Justin Finch-Fletchley', 'Miles Bletchley', 'Malcolm Baddock'], ['Marcus Belby', 'Euan Abercrombie', 'Vincent Crabbe', 'Ritchie Coote', 'Katie Bell', 'Terry Boot', 'Lavender Brown', 'Gregory Goyle', 'Marcus Flint', 'Dean Thomas', 'Jack Sloper', 'Rose Zeller', 'Stewart Ackerley', 'Fred Weasley', 'George Weasley', 'Romilda Vane', 'Alicia Spinnet', 'Kevin Whitby'], ['Friendly Friar', 'Grey Lady', 'Nearly Headless Nick', 'Bloody Baron']]
+    [['Harry Potter', 'Mandy Brocklehurst', 'Ron Weasley', 'Oliver Wood', 'Cnolin Creevey', 'Cho Chang', 'Michael Corner', 'Draco Malfoy', 'Seamus Finnigan', 'Eddie Carmichael', 'Theodore Nott', 'Terence Higgs', 'Hermione Granger', 'Penelope Clearwater', 'Angelina Johnson', 'Dennis Creevey'], ['Neville Longbottom', 'Cedric Diggory', 'Pansy Parkinson', 'Anthony Goldstein', 'Padma Patil', 'Luna Lovegood', 'Eleanor Branstone', 'Lee Jordan', 'Marietta Edgecombe', 'Andrew Kirke', 'Ginny Weasley', 'Mary Macdonald', 'Blaise Zabini', 'Natalie McDonald', 'Adrian Pucey', 'Hannah Abbott', 'Graham Pritchard', 'Susan Bones', 'Roger Davies', 'Owen Cauldwell'], ['Laura Madley', 'Orla Quirke', 'Parvati Patil', 'Eloise Midgeon', 'Zacharias Smith', 'Cormac McLaggen', 'Lisa Turpin', 'Demelza Robins', 'Ernie Macmillan', 'Millicent Bullstrode', 'Percy Weasley', 'Jimmy Peakes', 'Justin Finch-Fletchley', 'Miles Bletchley', 'Malcolm Baddock'], ['Marcus Belby', 'Euan Abercrombie', 'Vincent Crabbe', 'Ritchie Coote', 'Katie Bell', 'Terry Boot', 'Lavender Brown', 'Gregory Goyle', 'Marcus Flint', 'Dean Thomas', 'Jack Sloper', 'Rose Zeller', 'Stewart Ackerley', 'Fred Weasley', 'George Weasley', 'Romilda Vane', 'Alicia Spinnet', 'Kevin Whitby'], ['Friendly Friar', 'Grey Lady', 'Nearly Headless Nick', 'Bloody Baron']]
     """
 
-    all_students = []
-    winter_16 = []
-    spring_16 = []
-    summer_16 = []
-    fall_15 = []
-    ghosts = []
+    cohort_data = open(filename)
 
-    # Code goes here
+    student_data_split = [line.split('|') for line in cohort_data]
+
+    # winter_16 = []
+    # for student in student_data_split:
+    #     if student[4].startswith("Wi"):
+    #         winter_16.append(f"{student[0]} {student[1]}")
+
+    winter_16 = [f"{student[0]} {student[1]}" for student in
+                 student_data_split if (student[4].startswith("Wi"))]
+    spring_16 = [f"{student[0]} {student[1]}" for student in
+                 student_data_split if student[4].startswith("Sp")]
+    fall_15 = [f"{student[0]} {student[1]}" for student in
+                 student_data_split if student[4].startswith("Fa")]
+    summer_16 = [f"{student[0]} {student[1]}" for student in
+                 student_data_split if student[4].startswith("Su")]
+    ghosts = [f"{student[0]} {student[1]}" for student in
+                 student_data_split if student[4].startswith("G")]
+
+    all_students = [fall_15, winter_16, spring_16, summer_16, ghosts]
 
     return all_students
 
@@ -80,15 +93,30 @@ def hogwarts_by_house(filename):
     [['Abbott', 'Chang', 'Creevey', 'Creevey', 'Edgecombe', 'Nott', 'Spinnet'], ['Abercrombie', 'Bell', 'Brown', 'Coote', 'Finnigan', 'Granger', 'Johnson', 'Jordan', 'Kirke', 'Longbottom', 'Macdonald', 'McDonald', 'McLaggen', 'Patil', 'Peakes', 'Potter', 'Robins', 'Sloper', 'Thomas', 'Vane', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Wood'], ['Bones', 'Branstone', 'Cauldwell', 'Diggory', 'Finch-Fletchley', 'Macmillan', 'Madley', 'Midgeon', 'Smith', 'Whitby', 'Zeller'], ['Ackerley', 'Belby', 'Boot', 'Brocklehurst', 'Carmichael', 'Clearwater', 'Corner', 'Davies', 'Goldstein', 'Lovegood', 'Patil', 'Quirke', 'Turpin'], ['Baddock', 'Bletchley', 'Bullstrode', 'Crabbe', 'Flint', 'Goyle', 'Higgs', 'Malfoy', 'Parkinson', 'Pritchard', 'Pucey', 'Zabini'], ['Baron', 'Friar', 'Lady', 'Nick'], ['Flitwick', 'McGonagall', 'Snape', 'Sprout']]
 
     """
+#add last name to house list
+#sort
+#filter by houses, ghosts, instructors
 
-    all_hogwarts = []
-    dumbledores_army = []
-    gryffindor = []
-    hufflepuff = []
-    ravenclaw = []
-    slytherin = []
-    ghosts = []
-    instructors = []
+    cohort_data = open(filename)
+    student_data_split = [line.split('|') for line in cohort_data]
+
+    dumbledores_army = [student[1] for student in student_data_split if student[2].startswith("Dum")]
+    dumbledores_army.sort()
+    gryffindor = [student[1] for student in student_data_split if student[2].startswith("Gry")]
+    gryffindor.sort()
+    hufflepuff = [student[1] for student in student_data_split if student[2].startswith("Huf")]
+    hufflepuff.sort()
+    ravenclaw = [student[1] for student in student_data_split if student[2].startswith("Rav")]
+    ravenclaw.sort()
+    slytherin = [student[1] for student in student_data_split if student[2].startswith("Sly")]
+    slytherin.sort()
+    ghosts = [student[1] for student in student_data_split if student[4].startswith("G")]
+    ghosts.sort()
+    instructors = [student[1] for student in student_data_split if student[4].startswith("I")]
+    instructors.sort()
+
+    all_hogwarts = [dumbledores_army, gryffindor, hufflepuff, ravenclaw,
+                    slytherin, ghosts, instructors]
 
     # Code goes here
 
